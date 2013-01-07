@@ -204,6 +204,7 @@ static int inverse_for_options[NUMBER_OF_OPT] =
 /* 2 */ ARPT_INV_SRCDEVADDR,
 /* 3 */ ARPT_INV_TGTDEVADDR,
 /* -l */ ARPT_INV_ARPHLN,
+/* 8 */ 0,
 /* 4 */ ARPT_INV_ARPOP,
 /* 5 */ ARPT_INV_ARPHRD,
 /* 6 */ ARPT_INV_ARPPRO,
