@@ -1,4 +1,4 @@
-ARPTABLES_VERSION:=0.0.3-4
+ARPTABLES_VERSION:=0.0.4
 
 KERNEL_DIR:=./
 # default paths
@@ -66,11 +66,9 @@ clean:
 	rm -f include/*~ include/libarptc/*~
 
 DIR:=arptables-v$(ARPTABLES_VERSION)
-CVSDIRS:=CVS extensions/CVS libarptc/CVS include/CVS include/libarptc/CVS include/linux/CVS include/linux/netfilter_arp/CVS
 # This is used to make a new userspace release
 .PHONY: release
 release:
-	rm -rf $(CVSDIRS)
 	make clean
 	cd ..;find $(DIR) -exec touch {} \;;find $(DIR) -exec chmod o-r,g-r,o-w,g-w,o-x,g-x {} \;;tar -pc $(DIR) | gzip >$(DIR).tar.gz
 
