@@ -1216,7 +1216,6 @@ print_firewall(const struct arpt_entry *fw,
 {
 	struct arptables_target *target = NULL;
 	const struct arpt_entry_target *t;
-	u_int8_t flags;
 	char buf[BUFSIZ];
 	int i;
 	char iface[IFNAMSIZ+2];
@@ -1228,7 +1227,6 @@ print_firewall(const struct arpt_entry *fw,
 		target = find_target(ARPT_STANDARD_TARGET, LOAD_MUST_SUCCEED);
 
 	t = arpt_get_target((struct arpt_entry *)fw);
-	flags = fw->arp.flags;
 
 	if (format & FMT_LINENUMBERS)
 		printf("%u ", num+1);
@@ -1236,12 +1234,7 @@ print_firewall(const struct arpt_entry *fw,
 	if (!(format & FMT_NOTARGET) && targname[0] != '\0')
 		printf("-j %s ", targname);
 
-	if (fw->arp.invflags & ARPT_INV_VIA_IN) {
-		iface[0] = '!';
-		iface[1] = '\0';
-		print_iface = 1;
-	}
-	else iface[0] = '\0';
+	iface[0] = '\0';
 
 	if (fw->arp.iniface[0] != '\0') {
 		strcat(iface, fw->arp.iniface);
@@ -1253,15 +1246,10 @@ print_firewall(const struct arpt_entry *fw,
 		else strcat(iface, "any");
 	}
 	if (print_iface)
-		printf("-i %s ", iface);
+		printf("%s-i %s ", fw->arp.invflags & ARPT_INV_VIA_IN ? "! ": "", iface);
 
 	print_iface = 0;
-	if (fw->arp.invflags & ARPT_INV_VIA_OUT) {
-		iface[0] = '!';
-		iface[1] = '\0';
-		print_iface = 1;
-	}
-	else iface[0] = '\0';
+	iface[0] = '\0';
 
 	if (fw->arp.outiface[0] != '\0') {
 		strcat(iface, fw->arp.outiface);
@@ -1273,7 +1261,7 @@ print_firewall(const struct arpt_entry *fw,
 		else strcat(iface, "any");
 	}
 	if (print_iface)
-		printf("-o %s ", iface);
+		printf("%s-o %s ", fw->arp.invflags & ARPT_INV_VIA_OUT ? "! " : "", iface);
 
 	if (fw->arp.smsk.s_addr != 0L) {
 		printf("%s", fw->arp.invflags & ARPT_INV_SRCIP
