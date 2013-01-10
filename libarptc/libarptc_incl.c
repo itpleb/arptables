@@ -1248,7 +1248,6 @@ TC_ZERO_COUNTER(const ARPT_CHAINLABEL chain,
 		unsigned int rulenum,
 		TC_HANDLE_T *handle)
 {
-	STRUCT_ENTRY *e;
 	struct chain_cache *c;
 	unsigned int chainindex, end;
 	
@@ -1267,8 +1266,6 @@ TC_ZERO_COUNTER(const ARPT_CHAINLABEL chain,
 		errno = E2BIG;
 		return 0;
 	}
-
-	e = index2entry(*handle, chainindex + rulenum);
 
 	if ((*handle)->counter_map[chainindex + rulenum].maptype
 			== COUNTER_MAP_NORMAL_MAP) {
