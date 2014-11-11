@@ -257,22 +257,7 @@ TC_INIT(const char *tablename)
 	    == NULL)
 		return NULL;
 
-/* Too hard --RR */
-#if 0
-	sprintf(pathname, "%s/%s", ARPT_LIB_DIR, info.name);
-	dynlib = dlopen(pathname, RTLD_NOW);
-	if (!dynlib) {
-		errno = ENOENT;
-		return NULL;
-	}
-	h->hooknames = dlsym(dynlib, "hooknames");
-	if (!h->hooknames) {
-		errno = ENOENT;
-		return NULL;
-	}
-#else
 	h->hooknames = hooknames;
-#endif
 
 	/* Initialize current state */
 	h->info = info;
