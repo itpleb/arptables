@@ -105,6 +105,7 @@ struct arptables_target classify
 	ARPTABLES_VERSION,
 	ARPT_ALIGN(sizeof(struct xt_classify_target_info)),
 	ARPT_ALIGN(sizeof(struct xt_classify_target_info)),
+	0,
 	&help,
 	&init,
 	&parse,

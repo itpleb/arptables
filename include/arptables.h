@@ -32,6 +32,9 @@ struct arptables_match
 	/* Size of match data relevent for userspace comparison purposes */
 	size_t userspacesize;
 
+	/* Revision of target (0 by default). */
+	u_int8_t revision;
+
 	/* Function which prints out usage message. */
 	void (*help)(void);
 
@@ -80,6 +83,9 @@ struct arptables_target
 
 	/* Size of target data relevent for userspace comparison purposes */
 	size_t userspacesize;
+
+	/* Revision of target (0 by default). */
+	u_int8_t revision;
 
 	/* Function which prints out usage message. */
 	void (*help)(void);

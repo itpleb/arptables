@@ -2067,6 +2067,7 @@ int do_command(int argc, char *argv[], char **table, arptc_handle_t *handle)
 				target->t->u.target_size = size;
 				strncpy(target->t->u.user.name, jumpto, sizeof(target->t->u.user.name));
 				target->t->u.user.name[sizeof(target->t->u.user.name)-1] = '\0';
+				target->t->u.user.revision = target->revision;
 /*
 				target->init(target->t, &fw.nfcache);
 */
@@ -2392,6 +2393,7 @@ int do_command(int argc, char *argv[], char **table, arptc_handle_t *handle)
 			target->t = fw_calloc(1, size);
 			target->t->u.target_size = size;
 			strcpy(target->t->u.user.name, jumpto);
+			target->t->u.user.revision = target->revision;
 			target->init(target->t);
 		}
 

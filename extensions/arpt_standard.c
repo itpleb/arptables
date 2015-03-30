@@ -54,6 +54,7 @@ struct arptables_target standard
     ARPTABLES_VERSION,
     ARPT_ALIGN(sizeof(int)),
     ARPT_ALIGN(sizeof(int)),
+    0,
     &help,
     &init,
     &parse,

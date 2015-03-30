@@ -199,6 +199,7 @@ struct arptables_target change
     ARPTABLES_VERSION,
     ARPT_ALIGN(sizeof(struct arpt_mangle)),
     ARPT_ALIGN(sizeof(struct arpt_mangle)),
+    0,
     &help,
     &init,
     &parse,

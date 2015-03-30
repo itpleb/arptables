@@ -872,7 +872,7 @@ map_target(const TC_HANDLE_T handle,
 	/* memset to all 0 for your memcmp convenience. */
 	memset(t->u.user.name + strlen(t->u.user.name),
 	       0,
-	       FUNCTION_MAXNAMELEN - strlen(t->u.user.name));
+	       FUNCTION_MAXNAMELEN - 1 - strlen(t->u.user.name));
 	return 1;
 }
 
