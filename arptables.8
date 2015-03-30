@@ -315,6 +315,23 @@ sify the packet into a specific CBQ class).
 Set the major and minor  class  value.  The  values  are  always
 interpreted as hexadecimal even if no 0x prefix is given.
 
+.SS MARK
+This  module  allows you to set the skb->mark value (and thus classify
+the packet by the mark in u32)
+
+.TP
+.BR "--set-mark mark"
+Set the mark value. The  values  are  always
+interpreted as hexadecimal even if no 0x prefix is given
+
+.TP
+.BR "--and-mark mark"
+Binary AND the mark with bits.
+
+.TP
+.BR "--or-mark mark"
+Binary OR the mark with bits.
+
 .SH MAILINGLISTS
 .BR "" "See " http://netfilter.org/mailinglists.html
 .SH SEE ALSO
