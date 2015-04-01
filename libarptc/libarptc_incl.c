@@ -40,13 +40,6 @@ struct counter_map
 	unsigned int mappos;
 };
 
-/* Convenience structures */
-struct arpt_error_target
-{
-	STRUCT_ENTRY_TARGET t;
-	char error[TABLE_MAXNAMELEN];
-};
-
 struct chain_cache
 {
 	char name[TABLE_MAXNAMELEN];
@@ -1342,9 +1335,9 @@ TC_CREATE_CHAIN(const ARPT_CHAINLABEL chain, TC_HANDLE_T *handle)
 	newc.head.next_offset
 		= sizeof(STRUCT_ENTRY)
 		+ ALIGN(sizeof(struct arpt_error_target));
-	strcpy(newc.name.t.u.user.name, ERROR_TARGET);
-	newc.name.t.u.target_size = ALIGN(sizeof(struct arpt_error_target));
-	strcpy(newc.name.error, chain);
+	strcpy(newc.name.target.u.user.name, ERROR_TARGET);
+	newc.name.target.u.target_size = ALIGN(sizeof(struct arpt_error_target));
+	strcpy(newc.name.errorname, chain);
 
 	newc.ret.target_offset = sizeof(STRUCT_ENTRY);
 	newc.ret.next_offset
@@ -1482,8 +1475,8 @@ int TC_RENAME_CHAIN(const ARPT_CHAINLABEL oldname,
 	t = (struct arpt_error_target *)
 		GET_TARGET(get_entry(*handle, labeloff));
 
-	memset(t->error, 0, sizeof(t->error));
-	strcpy(t->error, newname);
+	memset(t->errorname, 0, sizeof(t->errorname));
+	strcpy(t->errorname, newname);
 	set_changed(*handle);
 
 	return 1;

@@ -3,6 +3,7 @@
 /* Library which manipulates filtering rules. */
 
 #include <libarptc/arpt_kernel_headers.h>
+#include <linux/netfilter/x_tables.h>
 #include <linux/netfilter_arp/arp_tables.h>
 
 #ifndef ARPT_MIN_ALIGN
