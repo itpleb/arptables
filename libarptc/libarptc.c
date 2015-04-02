@@ -134,7 +134,7 @@ dump_entry(STRUCT_ENTRY *e, const TC_HANDLE_T handle)
 	printf("Flags: %02X\n", e->arp.flags);
 	printf("Invflags: %02X\n", e->arp.invflags);
 	printf("Counters: %"PRIu64" packets, %"PRIu64" bytes\n",
-	       e->counters.pcnt, e->counters.bcnt);
+	       (uint64_t)e->counters.pcnt, (uint64_t)e->counters.bcnt);
 /*
 	printf("Cache: %08X ", e->nfcache);
 	if (e->nfcache & NFC_ALTERED) printf("ALTERED ");

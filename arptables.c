@@ -2164,16 +2164,17 @@ int do_command(int argc, char *argv[], char **table, arptc_handle_t *handle)
 					"-%c requires packet and byte counter",
 					opt2char(OPT_COUNTERS));
 
-			if (sscanf(pcnt, "%"PRIu64, &fw.counters.pcnt) != 1)
+			if (sscanf(pcnt, "%"PRIu64,
+				   (uint64_t *)&fw.counters.pcnt) != 1)
 				exit_error(PARAMETER_PROBLEM,
 					"-%c packet counter not numeric",
 					opt2char(OPT_COUNTERS));
 
-			if (sscanf(bcnt, "%"PRIu64, &fw.counters.bcnt) != 1)
+			if (sscanf(bcnt, "%"PRIu64,
+				   (uint64_t *)&fw.counters.bcnt) != 1)
 				exit_error(PARAMETER_PROBLEM,
 					"-%c byte counter not numeric",
 					opt2char(OPT_COUNTERS));
-			
 			break;
 
 
