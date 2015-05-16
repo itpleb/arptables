@@ -23,10 +23,6 @@
 #define inline
 #endif
 
-#if !defined(__GLIBC__) || (__GLIBC__ < 2)
-typedef unsigned int socklen_t;
-#endif
-
 #include "libarptc/libarptc.h"
 
 #define IP_VERSION	4
