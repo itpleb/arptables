@@ -1,6 +1,7 @@
 #ifndef _ARPTABLES_USER_H
 #define _ARPTABLES_USER_H
 
+#include <stdint.h>
 #include "arptables_common.h"
 #include "libarptc/libarptc.h"
 
@@ -33,7 +34,7 @@ struct arptables_match
 	size_t userspacesize;
 
 	/* Revision of target (0 by default). */
-	u_int8_t revision;
+	uint8_t revision;
 
 	/* Function which prints out usage message. */
 	void (*help)(void);
@@ -85,7 +86,7 @@ struct arptables_target
 	size_t userspacesize;
 
 	/* Revision of target (0 by default). */
-	u_int8_t revision;
+	uint8_t revision;
 
 	/* Function which prints out usage message. */
 	void (*help)(void);
@@ -132,7 +133,7 @@ extern char *mask_to_dotted(const struct in_addr *mask);
 
 extern void parse_hostnetworkmask(const char *name, struct in_addr **addrpp,
                       struct in_addr *maskp, unsigned int *naddrs);
-extern u_int16_t parse_protocol(const char *s);
+extern uint16_t parse_protocol(const char *s);
 
 extern int do_command(int argc, char *argv[], char **table,
 		      arptc_handle_t *handle);

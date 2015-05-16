@@ -1688,7 +1688,7 @@ TC_COMMIT(TC_HANDLE_T *handle)
 		/* Kernel will think that pointer should be 64-bits, and get
 		   padding.  So we accomodate here (assumption: alignment of
 		   `counters' is on 64-bit boundary). */
-		u_int64_t *kernptr = (u_int64_t *)&newcounters->counters;
+		uint64_t *kernptr = (uint64_t *)&newcounters->counters;
 		if ((unsigned long)&newcounters->counters % 8 != 0) {
 			fprintf(stderr,
 				"counters alignment incorrect! Mail rusty!\n");

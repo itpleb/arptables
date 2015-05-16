@@ -7,9 +7,10 @@
 #include <linux/netfilter_arp/arp_tables.h>
 
 #ifndef ARPT_MIN_ALIGN
-/* arpt_entry has pointers and u_int64_t's in it, so if you align to
-   it, you'll also align to any crazy matches and targets someone
-   might write */
+/* arpt_entry has pointers and uint64_t's in it, so if you align to
+ * it, you'll also align to any crazy matches and targets someone
+ * might write.
+ */
 #define ARPT_MIN_ALIGN (__alignof__(struct arpt_entry))
 #endif
 

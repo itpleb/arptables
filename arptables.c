@@ -230,7 +230,7 @@ extern void dump_entries(const arptc_handle_t handle);
    /etc/protocols */
 struct pprot {
 	char *name;
-	u_int8_t num;
+	uint8_t num;
 };
 
 /* Primitive headers... */
@@ -926,7 +926,7 @@ mask_to_dotted(const struct in_addr *mask)
 {
 	int i;
 	static char buf[20];
-	u_int32_t maskaddr, bits;
+	uint32_t maskaddr, bits;
 
 	maskaddr = ntohl(mask->s_addr);
 
@@ -968,7 +968,7 @@ string_to_number(const char *s, unsigned int min, unsigned int max,
 }
 
 static void
-set_option(unsigned int *options, unsigned int option, u_int16_t *invflg,
+set_option(unsigned int *options, unsigned int option, uint16_t *invflg,
 	   int invert)
 {
 	if (*options & option)
@@ -1108,7 +1108,7 @@ register_target(struct arptables_target *me)
 }
 
 static void
-print_num(u_int64_t number, unsigned int format)
+print_num(uint64_t number, unsigned int format)
 {
 	if (format & FMT_KILOMEGAGIGA) {
 		if (number > 99999) {

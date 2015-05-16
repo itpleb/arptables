@@ -256,8 +256,8 @@ unconditional(const struct arpt_arp *arp)
 {
 	unsigned int i;
 
-	for (i = 0; i < sizeof(*arp)/sizeof(u_int32_t); i++)
-		if (((u_int32_t *)arp)[i])
+	for (i = 0; i < sizeof(*arp) / sizeof(uint32_t); i++)
+		if (((uint32_t *)arp)[i])
 			return 0;
 
 	return 1;
