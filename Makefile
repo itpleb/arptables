@@ -7,7 +7,6 @@ LIBDIR:=$(PREFIX)/lib
 BINDIR:=$(PREFIX)/sbin
 MANDIR:=$(PREFIX)/man
 man8dir=$(MANDIR)/man8
-INITDIR:=/etc/rc.d/init.d
 SYSCONFIGDIR:=/etc/sysconfig
 DESTDIR:=
 
@@ -46,15 +45,12 @@ $(DESTDIR)$(BINDIR)/arptables: arptables
 tmp1:=$(shell printf $(BINDIR) | sed 's/\//\\\//g')
 tmp2:=$(shell printf $(SYSCONFIGDIR) | sed 's/\//\\\//g')
 .PHONY: scripts
-scripts: arptables-save arptables-restore arptables.sysv
+scripts: arptables-save arptables-restore
 	cat arptables-save | sed 's/__EXEC_PATH__/$(tmp1)/g' > arptables-save_
 	install -m 0755 arptables-save_ $(DESTDIR)$(BINDIR)/arptables-save
 	cat arptables-restore | sed 's/__EXEC_PATH__/$(tmp1)/g' > arptables-restore_
 	install -m 0755 arptables-restore_ $(DESTDIR)$(BINDIR)/arptables-restore
-	cat arptables.sysv | sed 's/__EXEC_PATH__/$(tmp1)/g' | sed 's/__SYSCONFIG__/$(tmp2)/g' > arptables.sysv_
-	if [ "$(DESTDIR)" != "" ]; then mkdir -p $(DESTDIR)$(INITDIR); fi
-	if test -d $(DESTDIR)$(INITDIR); then install -m 0755 arptables.sysv_ $(DESTDIR)$(INITDIR)/arptables; fi
-	rm -f arptables-save_ arptables-restore_ arptables.sysv_
+	rm -f arptables-save_ arptables-restore_
 
 .PHONY: install-man
 install-man: $(MANS)
