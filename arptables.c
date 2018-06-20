@@ -468,7 +468,7 @@ exit_printhelp(void)
 	struct arptables_target *t = NULL;
 	int i;
 
-	printf("%s v%s\n\n"
+	printf("%s v%s (legacy)\n\n"
 "Usage: %s -[AD] chain rule-specification [options]\n"
 "       %s -[RI] chain rulenum rule-specification [options]\n"
 "       %s -D chain rulenum [options]\n"

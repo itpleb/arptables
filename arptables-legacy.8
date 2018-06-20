@@ -1,4 +1,4 @@
-.TH ARPTABLES 8  "November 2011"
+.TH ARPTABLES 8  "June 2018"
 .\"
 .\" Man page originally written by Jochen Friedrich <jochen@scram.de>,
 .\" maintained by Bart De Schuymer.
@@ -22,7 +22,7 @@
 .\"
 .\"
 .SH NAME
-arptables \- ARP table administration
+arptables \- ARP table administration (legacy)
 .SH SYNOPSIS
 .BR "arptables " [ "-t table" ] " -" [ AD ] " chain rule-specification " [ options ]
 .br
@@ -37,6 +37,18 @@ arptables \- ARP table administration
 .BR "arptables " [ "-t table" ] " -E old-chain-name new-chain-name"
 .br
 .BR "arptables " [ "-t table" ] " -P chain target " [ options ]
+
+.SH LEGACY
+This tool uses the old xtables/setsockopt framework, and is a legacy version
+of arptables. That means that a new, more modern tool exists with the same
+functionality using the nf_tables framework and you are encouraged to migrate now.
+The new binaries (formerly known as -compat) uses the same syntax and
+semantics than this legacy one.
+
+You can still use this legacy tool. You should probably get some specific
+information from your Linux distribution or vendor.
+More docs are available at https://wiki.nftables.org
+
 .SH DESCRIPTION
 .B arptables
 is a user space tool, it is used to set up and maintain the

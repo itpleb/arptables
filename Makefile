@@ -10,7 +10,7 @@ man8dir=$(MANDIR)/man8
 SYSCONFIGDIR:=/etc/sysconfig
 DESTDIR:=
 
-MANS = arptables.8 arptables-save.8 arptables-restore.8
+MANS = arptables-legacy.8 arptables-save.8 arptables-restore.8
 
 COPT_FLAGS:=-O2
 CFLAGS:=$(COPT_FLAGS) -Wall -Wunused -I$(KERNEL_DIR)/include/ -Iinclude/ -DARPTABLES_VERSION=\"$(ARPTABLES_VERSION)\" #-g -DDEBUG #-pg # -DARPTC_DEBUG
@@ -21,7 +21,7 @@ endif
 
 include extensions/Makefile
 
-all: arptables libarptc/libarptc.a
+all: arptables-legacy libarptc/libarptc.a
 
 arptables.o: arptables.c
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -35,10 +35,10 @@ libarptc/libarptc.o: libarptc/libarptc.c libarptc/libarptc_incl.c
 libarptc/libarptc.a: libarptc/libarptc.o
 	$(AR) rcs $@ $<
 
-arptables: arptables-standalone.o arptables.o libarptc/libarptc.o $(EXT_OBJS)
+arptables-legacy: arptables-standalone.o arptables.o libarptc/libarptc.o $(EXT_OBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
-$(DESTDIR)$(BINDIR)/arptables: arptables
+$(DESTDIR)$(BINDIR)/arptables-legacy: arptables-legacy
 	mkdir -p $(DESTDIR)$(BINDIR)
 	install -m 0755 $< $@
 
@@ -58,11 +58,11 @@ install-man: $(MANS)
 	install -m 0644 $^ $(DESTDIR)$(man8dir)/
 
 .PHONY: install
-install: install-man $(DESTDIR)$(BINDIR)/arptables scripts
+install: install-man $(DESTDIR)$(BINDIR)/arptables-legacy scripts
 
 .PHONY: clean
 clean:
-	rm -f arptables
+	rm -f arptables-legacy
 	rm -f *.o *~
 	rm -f extensions/*.o extensions/*~
 	rm -f libarptc/*.o libarptc/*~ libarptc/*.a
