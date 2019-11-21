@@ -191,21 +191,16 @@ alloc_handle(const char *tablename, unsigned int size, unsigned int num_rules)
 		+ size
 		+ num_rules * sizeof(struct counter_map);
 
-	if ((h = malloc(len)) == NULL) {
+	if ((h = calloc(1, len)) == NULL) {
 		errno = ENOMEM;
 		return NULL;
 	}
 
-	h->changed = 0;
-	h->cache_num_chains = 0;
-	h->cache_chain_heads = NULL;
 	h->counter_map = (void *)h
 		+ sizeof(STRUCT_TC_HANDLE)
 		+ size;
-	strncpy(h->info.name, tablename, sizeof(h->info.name));
-	h->info.name[sizeof(h->info.name)-1] = '\0';
-	strncpy(h->entries.name, tablename, sizeof(h->entries.name));
-	h->entries.name[sizeof(h->entries.name)-1] = '\0';
+	strncpy(h->info.name, tablename, sizeof(h->info.name) - 1);
+	strncpy(h->entries.name, tablename, sizeof(h->entries.name) - 1);
 
 	return h;
 }
