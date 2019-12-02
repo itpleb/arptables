@@ -1,4 +1,4 @@
-ARPTABLES_VERSION:=0.0.4
+ARPTABLES_VERSION:=0.0.5
 
 KERNEL_DIR:=./
 # default paths
